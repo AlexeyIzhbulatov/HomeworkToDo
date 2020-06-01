@@ -25,9 +25,15 @@ function App() {
         setTodos(updatedTodos);
     }
 
+    const onTaskDone = (id) => {
+        console.log('APP Delete ' + id);
+        const updatedTodos = todos.filter(el => el.id == id);
+        setTodos(updatedTodos);
+    }
+
     return (
         <div className="App">
-            <TodoList todos={todos} onTaskDelete={onTaskDelete}/>
+            <TodoList todos={todos} onTaskDelete={onTaskDelete} onTaskDone={onTaskDone}/>
             <TodoCreateForm onCreateTask={onCreateTask}/>
         </div>
     );
