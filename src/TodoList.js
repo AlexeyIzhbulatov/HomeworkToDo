@@ -11,6 +11,7 @@ function TodoList(props) {
                     <li key={el.id}>{el.name}
                         <button onClick={() => props.onTaskDelete(el.id)}>Delete</button>
                     </li>)
+                )
             }
         </div>
     );
