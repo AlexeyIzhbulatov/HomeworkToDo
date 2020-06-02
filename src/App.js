@@ -26,10 +26,10 @@ function App() {
        setTodos(updateTodos);
    }
 
-    const onTaskDone = (id) => {
+    const onTaskDoneToggle = (id) => {
         console.log('APP delete ' + id)
         const updateTodos = todos.map(el => {
-            if(el.id === id) return {...el, done: true}
+            if(el.id === id) return {...el, done: !el.done}
             else return el;
         })
         setTodos(updateTodos)
@@ -38,7 +38,7 @@ function App() {
 
     return (
         <div className="App">
-           <TodoList todos={todos} onTaskDelete={onTaskDelete} onTaskDone={onTaskDone}/>
+           <TodoList todos={todos} onTaskDelete={onTaskDelete} onTaskDoneToggle={onTaskDoneToggle}/>
            <TodoCreateForm onCreateTask={onCreateTask}/>
         </div>
     );

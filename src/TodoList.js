@@ -10,7 +10,7 @@ function TodoList(props) {
                 props.todos.map(el => <li key={el.id}>
                     {el.name}
                     {el.done && '✅'}
-                    <button onClick={() => props.onTaskDone(el.id)}>Done</button>
+                    <button onClick={() => props.onTaskDoneToggle(el.id)}>{el.done ? 'undone' : 'done'}</button>
                 <button onClick={() => props.onTaskDelete(el.id)}>Delete</button>
                 </li>)
 
