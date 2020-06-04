@@ -7,10 +7,11 @@ function TodoCreateForm(props) {
     const [task, setTask] = useState('');
 
     const addTask = () => {
-        console.log('Create task' + task)
+        console.log('Create task' + task);
         props.onCreateTask(task)
-        setTask('');
+        setTask('')
     }
+
 
     return (
         <div className="createForm">
