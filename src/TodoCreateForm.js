@@ -4,19 +4,18 @@ import './App.css';
 
 function TodoCreateForm(props) {
 
-    const [task, setTask] = useState('');
+    const [task, setTask] = useState('')
 
     const addTask = () => {
         console.log('Create task' + task);
-        props.onCreateTask(task)
+        props.onCreateTask(task);
         setTask('')
     }
-
 
     return (
         <div className="createForm">
             <input type="text" value={task} onChange={e => setTask(e.target.value)}/>
-            <button onClick={addTask}>Add task</button>
+            <button onClick={addTask} disabled={task.trim() === ''}>Add task</button>
         </div>
     );
 }

@@ -10,34 +10,34 @@ const initialTodos = [
 ]
 
 function App() {
+const [todos, setTodos] = useState(initialTodos);
 
-    const [todos, setTodos] = useState(initialTodos)
+const onCreateTask = (task) => {
+    console.log('APP task' + task)
+    const updatedTodos = [...todos];
+    updatedTodos.push({id: Math.random(), name: task, done: false});
+    setTodos(updatedTodos)
+}
 
-    const onrCreateTask = (task) => {
-        console.log('APP task' + task);
-const updateCreateTask = [...todos];
-updateCreateTask.push({id: Math.random(), name: task, done: false})
-        setTodos(updateCreateTask);
-    }
+const onDeleteTask = (id) => {
+    console.log('APP' + id);
+    const updateDeleteTask = todos.filter(el => el.id !==id)
+    setTodos(updateDeleteTask)
+}
 
-    const onDeleteTask = (id) => {
-        console.log('APP delete' + id)
-        const updateDeleteTask = todos.filter(el => el.id !==id)
-        setTodos(updateDeleteTask)
-    }
+const onDoneTask = (id) => {
+    const updateDoneTask = todos.map(el => {
+        if(el.id === id) return {...el, done: !el.done}
+        else return el;
+    })
 
-    const onTaskDoneToggle = (id) => {
-        const updatedTodos = todos.map(el => {
-            if(el.id === id) return {...el, done: !el.done}
-            else return el;
-        })
-        setTodos(updatedTodos)
-    };
+    setTodos(updateDoneTask)
+};
 
     return (
         <div className="App">
- <TodoList todos={todos} onDeleteTask={onDeleteTask} onTaskDoneToggle={onTaskDoneToggle}/>
- <TodoCreateForm onCreateTask={onrCreateTask}/>
+ <TodoList todos={todos} onDeleteTask={onDeleteTask} onDoneTask={onDoneTask}/>
+ <TodoCreateForm onCreateTask={onCreateTask}/>
         </div>
     );
 }
