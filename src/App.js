@@ -34,9 +34,11 @@ const onDoneTask = (id) => {
     setTodos(updateDoneTask)
 };
 
+
+
     return (
         <div className="App">
- <TodoList todos={todos} onDeleteTask={onDeleteTask} onDoneTask={onDoneTask}/>
+ <TodoList todos={todos} onDeleteTask={onDeleteTask} onDoneTask={onDoneTask} />
  <TodoCreateForm onCreateTask={onCreateTask}/>
         </div>
     );
