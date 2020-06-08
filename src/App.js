@@ -5,41 +5,42 @@ import TodoCreateForm from "./TodoCreateForm";
 
 const initialTodos = [
     {id: 1, name: 'Test1', done: false},
-    {id: 2, name: 'Test2', done: true},
+    {id: 2, name: 'Test2', done: false},
     {id: 3, name: 'Test3', done: false},
+
 ]
 
 function App() {
-const [todos, setTodos] = useState(initialTodos);
 
-const onCreateTask = (task) => {
-    console.log('APP task' + task)
-    const updatedTodos = [...todos];
-    updatedTodos.push({id: Math.random(), name: task, done: false});
-    setTodos(updatedTodos)
-}
+    const [todos, setTodos] = useState(initialTodos)
 
-const onDeleteTask = (id) => {
-    console.log('APP' + id);
-    const updateDeleteTask = todos.filter(el => el.id !==id)
-    setTodos(updateDeleteTask)
-}
+    const onCreateTask = (task) => {
+        console.log('App' + task)
+        const updateTodos = [...todos];
+        updateTodos.push({id: Math.random(), name: task, done: false});
+        setTodos(updateTodos)
+    }
 
-const onDoneTask = (id) => {
-    const updateDoneTask = todos.map(el => {
-        if(el.id === id) return {...el, done: !el.done}
-        else return el;
-    })
+    const onTaskDelete = (id) => {
+        console.log(id);
+        const updateDelete = todos.filter(el => el.id !== id)
+        setTodos(updateDelete)
+    }
 
-    setTodos(updateDoneTask)
-};
-
+    const onTaskDoneToggle = (id) => {
+        const updateTaskDone = todos.map(el => {
+            if(el.id === id) return {...el, done: !el.done}
+            else return el;
+        })
+        setTodos(updateTaskDone)
+    }
 
 
     return (
         <div className="App">
- <TodoList todos={todos} onDeleteTask={onDeleteTask} onDoneTask={onDoneTask} />
- <TodoCreateForm onCreateTask={onCreateTask}/>
+<TodoList todos={todos} onTaskDelete={onTaskDelete} onTaskDoneToggle={onTaskDoneToggle}/>
+<TodoCreateForm onCreateTask={onCreateTask}/>
+
         </div>
     );
 }
