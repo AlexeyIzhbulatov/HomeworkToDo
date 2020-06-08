@@ -29,17 +29,26 @@ function App() {
 
     const onTaskDoneToggle = (id) => {
         const updateTaskDone = todos.map(el => {
-            if(el.id === id) return {...el, done: !el.done}
+            if (el.id === id) return {...el, done: !el.done}
             else return el;
         })
         setTodos(updateTaskDone)
     }
 
+    const onTaskSave = (task) => {
+        const updateTaskSave = todos.map(el => {
+            if (el.id === task.id) return {...el, name: task.name}
+            else return el;
+        });
+        setTodos(updateTaskSave)
+    }
+
 
     return (
         <div className="App">
-<TodoList todos={todos} onTaskDelete={onTaskDelete} onTaskDoneToggle={onTaskDoneToggle}/>
-<TodoCreateForm onCreateTask={onCreateTask}/>
+            <TodoList todos={todos} onTaskDelete={onTaskDelete} onTaskDoneToggle={onTaskDoneToggle}
+                      onTaskSave={onTaskSave}/>
+            <TodoCreateForm onCreateTask={onCreateTask}/>
 
         </div>
     );
