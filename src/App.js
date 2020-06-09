@@ -35,13 +35,12 @@ function App() {
         setTodos(updateTaskDone)
     }
 
-    const onTaskSave = (task) => {
+   const onTaskSave = (task) => {
         const updateTaskSave = todos.map(el => {
-            if (el.id === task.id) return {...el, name: task.name}
+            if(el.id === task.id) return {...el, name: task.name}
             else return el;
-        });
-        setTodos(updateTaskSave)
-    }
+        })
+   }
 
 
     return (

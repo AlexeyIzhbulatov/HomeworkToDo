@@ -16,7 +16,7 @@ function TodoCreateForm(props) {
     return (
         <div className="createForm">
         <input type="text" value={task} onChange={e => setTask(e.target.value)}/>
-        <button onClick={addTask} disabled={task.trim() === ''}>Add task</button>
+        <button onClick={addTask} disabled={task.trim()}>Add task</button>
         </div>
     );
 }

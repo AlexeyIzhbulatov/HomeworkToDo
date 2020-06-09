@@ -11,11 +11,11 @@ function TodoList(props) {
         setEditTask({...editTask, name: e.target.value})
     }
 
-
-    const TaskSave = () => {
-        props.onTaskSave(editTask)
+const onTaskSave = () =>{
+        props.onTaskSave(editTask);
         setEditTask({})
-    }
+}
+
 
     return (
         <div className="todo">
@@ -28,7 +28,7 @@ function TodoList(props) {
                             ? <>
                                 <input type="text" value={editTask.name}
                                        onChange={onChangeTaskEdit}/>
-                                <button onClick={TaskSave}>Save</button>
+                                <button onClick={onTaskSave}>Save</button>
                             </>
                             : <span onClick={() => editMode(el)}>{el.name}</span>
                     }
