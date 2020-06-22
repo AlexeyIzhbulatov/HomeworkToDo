@@ -5,22 +5,21 @@ import TodoCreateForm from "./TodoCreateForm";
 
 const initialTodos = [
     {id: 1, name: 'Test1', done: false},
-    {id: 1, name: 'Test1', done: false},
+    {id: 2, name: 'Test2', done: false},
 ]
 
 function App() {
-
-    const [todos, setTodos] = useState(initialTodos);
+    const [todos, setTodos] = useState(initialTodos)
 
     const onCreateTask = (task) => {
         console.log(task)
-        const updateCreateTodos = [...todos];
-        updateCreateTodos.push({id: Math.random(), name: task, done: true})
-        setTodos(updateCreateTodos)
+        const updateOnCreateTask = [...todos];
+        updateOnCreateTask.push({id: Math.random(), name: task, done: false})
+        setTodos(updateOnCreateTask)
     }
 
     const onDeleteTask = (id) => {
-        console.log(id)
+        const onDeleteTask = todos.filter(el => el.id !== id)
     }
 
     return (
