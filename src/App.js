@@ -1,41 +1,46 @@
 import React, {useState} from 'react';
 import './App.css';
+import {v4 as uuidv4} from 'uuid';
 import TodoList from "./TodoList";
-import TodoCreateForm from "./TodoCreateForm";
 
-const initialTodos = [
-    {id: 1, name: 'Test1', done: false},
-    {id: 2, name: 'Test2', done: false},
+const taski = [
+    {id: uuidv4(), nameTask: 'Name One', done: false, priority: 10},
+    {id: uuidv4(), nameTask: 'Name Two', done: false, priority: 20},
+    {id: uuidv4(), nameTask: 'Name Three', done: false, priority: 30},
 ]
 
 function App() {
-    const [todos, setTodos] = useState(initialTodos)
 
-    const onCreateTask = (task) => {
-        console.log(task)
-        const updateOnCreateTask = [...todos];
-        updateOnCreateTask.push({id: Math.random(), name: task, done: false})
-        setTodos(updateOnCreateTask)
-    }
+    const [tasks, setTasks] = useState(taski)
 
-    const onDeleteTask = (id) => {
-        const onDeleteTask = todos.filter(el => el.id !==id)
-        setTodos(onDeleteTask)
-    }
-
-    const onDoneTask = (id) => {
-        const updateOnDoneTask = todos.map(el => {
-            if(el.id === id) return {...el, done: false}
+    const onUpTask = (index) => {
+        if(index === 0) return
+        const unRealUpTask = tasks.map((el, i) => {
+            if (index === i) return tasks[index - 1];
+            if ((index - 1) === i) return tasks[index];
+            return el;
         })
-        setTodos(updateOnDoneTask)
+        setTasks(unRealUpTask)
     }
+
+
+    const onDownTask = (index) => {
+        if(index === 0) return
+        const unRealUpTask = tasks.map((el, i) => {
+            if (index === i) return tasks[index + 1];
+            if ((index + 1) === i) return tasks[index];
+            return el;
+        })
+        setTasks(unRealUpTask)
+    }
+
 
     return (
         <div className="App">
-            <TodoList todos={todos} onDeleteTask={onDeleteTask} onDoneTask={onDoneTask}/>
-            <TodoCreateForm onCreateTask={onCreateTask}/>
+            <TodoList tasks={tasks} onUpTask={onUpTask} onDownTask={onDownTask}/>
         </div>
     );
 }
 
 export default App;
+
