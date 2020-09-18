@@ -35,9 +35,9 @@ function TodoList(props) {
         <div>
             {
                 props.task.map((el,index) => <li key={el.id}>{el.name}
-                {/*<span onClick={() => props.onDoneTask(el.id)}>{el.done ? <span>{ok}</span> : <span>{no}</span> }</span>*/}
-                    <button type="button" className="btn btn-secondary" onClick={() => props.onUpTask(index)}>{up}</button>
-                    <button type="button" className="btn btn-secondary" onClick={() => props.onDownTask(index)}>{down}</button>
+                <span onClick={() => props.onDoneTask(el.id)}>{el.done ? <span>{ok}</span> : <span>{no}</span> }</span>
+                  <button onClick={() => props.onUpTask(index)}>{up}</button>
+                    <button onClick={() => props.onDownTask(index)}>{down}</button>
                     <button type="button" className="btn btn-danger" onClick={() => props.onDeleteTask(el.id)}>Delete</button>
                 </li>)
             }
@@ -46,4 +46,3 @@ function TodoList(props) {
 }
 
 export default TodoList;
-
