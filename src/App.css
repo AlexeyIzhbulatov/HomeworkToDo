@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.todoList li {
+  list-style-type: none;
+}
+
+.deletes {
+  width: 70px;
+}
