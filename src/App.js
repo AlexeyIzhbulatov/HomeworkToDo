@@ -35,6 +35,7 @@ const [task, setTask] = useState(initialTodos)
     }
 
     const onDownTask = (indexPlus, indexMoment) => {
+    if(indexPlus < 0 || indexPlus >= task.length) return
     const updateDown = task.map((el, i) => {
         if(indexMoment === i) return (indexPlus)
         if(indexPlus === i) return (indexMoment)
@@ -47,7 +48,7 @@ const [task, setTask] = useState(initialTodos)
     return (
         <div className="App">
             <CreateForm onCreateTask={onCreateTask}/>
-            <TodoList task={task} onDoneTask={onDoneTask} onDeleteTask={onDeleteTask} onDownTask={onDownTask}/>
+            <TodoList task={task} onDoneTask={onDoneTask} onDeleteTask={onDeleteTask} onDownTask={onDownTask} el={el} index={index}/>
         </div>
     );
 }
