@@ -34,27 +34,25 @@ const [task, setTask] = useState(initialTodos)
         setTask(updateDeleteTask)
     }
 
-    const onUpTask = (index) => {
-    if(index === 0) return
-    const updateUp = task.map((el, i) => {
-        if(index === i) return task[index - 1]
-        if(index -1 === i) return task[index]
-        return el;
-    })
-        setTask(updateUp)
-    }
+ const onUpTask = (index) => {
+    if(index - 1 === 0) return
+     const updateUp = task.map((el, i) => {
+         if(index === i) return task[index - 1]
+         if(index - 1 === i) return [index]
+         return el;
+     })
+     setTask(updateUp)
+ }
 
-    const onDownTask = (index) => {
-    if(index +1 === task.length) return
-    const updateDown = task.map((el, i) => {
-        if(index === i) return task[index +1]
-        if(index + 1 === i) return task[index]
-        return el;
-    })
-        setTask(updateDown)
-    }
-
-
+ const onDownTask = (index) => {
+    if(index + 1 === task.length) return
+     const updateDown = task.map((el, i) =>{
+         if(index === i) return task[index + 1]
+         if(index +1 === i) return task[index]
+         return el
+     })
+     setTask(updateDown)
+ }
 
 
     return (
@@ -66,3 +64,36 @@ const [task, setTask] = useState(initialTodos)
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const onUpTask = (index) => {
+//     if(index === 0) return
+//     const updateUp = task.map((el, i) => {
+//         if(index === i) return task[index - 1]
+//         if(index -1 === i) return task[index]
+//         return el;
+//     })
+//     setTask(updateUp)
+// }
+//
+// const onDownTask = (index) => {
+//     if(index +1 === task.length) return
+//     const updateDown = task.map((el, i) => {
+//         if(index === i) return task[index +1]
+//         if(index + 1 === i) return task[index]
+//         return el;
+//     })
+//     setTask(updateDown)
+// }
+//
