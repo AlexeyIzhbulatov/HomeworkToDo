@@ -1,38 +1,61 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-import {v4 as uuidv4} from 'uuid';
+// import {v4 as uuidv4} from 'uuid';
 import TodoList from "./TodoList";
 import CreateForm from "./CreateForm";
+import axios from "axios";
 
-const initialTodos = [
-    {id: uuidv4(), name: 'Task1', done: false},
-    {id: uuidv4(), name: 'Task2', done: false},
-
-]
 
 function App() {
 
-const [task, setTask] = useState(initialTodos)
 
-    const onCreateTask = (tasks) => {
-    console.log(tasks)
-        const updateCreateTask = [...task]
-        updateCreateTask.push({id: uuidv4(), name: tasks, done: false})
-        setTask(updateCreateTask)
+
+const [task, setTask] = useState([])
+
+    const onCreateTask = async (tasks, _id) => {
+        await axios.post('http://localhost:5000/todo', {name: tasks})
+            .then(function (response) {
+                    // handle success
+                }
+            )
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+
+        await axios.get('http://localhost:5000/todo')
+            .then(function (response) {
+                // handle success
+                const updateResponse = response.data;
+                setTask(updateResponse)
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
     }
 
-    const onDoneTask = (id) => {
+    const onDeleteTask = (_id) => {
+        axios.delete(`http://localhost:5000/todo/${_id}`)
+            .then(function (response) {
+                // handle success
+                const updateDelete = task.filter(el => el._id !== _id)
+                setTask(updateDelete)
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }
+
+    const onDoneTask = (_id) => {
        const updateDoneToggle = task.map(el => {
-           if(el.id === id) return {...el, done: !el.done}
+           if(el._id === _id) return {...el, done: !el.done}
            else return el;
        })
         setTask(updateDoneToggle)
     }
 
-    const onDeleteTask = (id) => {
-    const updateDeleteTask = task.filter(el => el.id !== id)
-        setTask(updateDeleteTask)
-    }
 
 
 const onUpTask = (index) => {
@@ -54,6 +77,22 @@ const onDownTask = (index) => {
     })
     setTask(updateDown)
 }
+
+useEffect(() => {
+    axios.get('http://localhost:5000/todo')
+        .then(function (response) {
+            // handle success
+            const updateResponse = response.data;
+            setTask(updateResponse)
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+},[])
+
+
+
 
 
 

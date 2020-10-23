@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import CreateForm from "./CreateForm";
 
 
 
@@ -34,11 +33,11 @@ function TodoList(props) {
     return (
         <div>
             {
-                props.task.map((el,index) => <li key={el.id}>{el.name}
-                <span onClick={() => props.onDoneTask(el.id)}>{el.done ? <span>{ok}</span> : <span>{no}</span> }</span>
+                props.task.map((el,index) => <li key={el._id}>{el.name}
+                <span onClick={() => props.onDoneTask(el._id)}>{el.done ? <span>{ok}</span> : <span>{no}</span> }</span>
                   <button onClick={() => props.onUpTask(index)}>{up}</button>
                     <button onClick={() => props.onDownTask(index)}>{down}</button>
-                    <button type="button" className="btn btn-danger" onClick={() => props.onDeleteTask(el.id)}>Delete</button>
+                    <button type="button" className="btn btn-danger" onClick={() => props.onDeleteTask(el._id)}>Delete</button>
                 </li>)
             }
         </div>
